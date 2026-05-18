@@ -1,9 +1,10 @@
+import BannerSection from "@/Components/BannerSection";
 
 
 export default function Home() {
   return (
     <div>
-      DriveFleet Car 
+      <BannerSection/>
     </div>
   );
 }

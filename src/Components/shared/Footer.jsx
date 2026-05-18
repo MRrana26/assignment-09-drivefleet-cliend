@@ -32,7 +32,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Quick Links</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Useful Links</h3>
                         <ul className="space-y-2">
 
                             <li>
@@ -89,7 +89,7 @@ const Footer = () => {
 
 
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Contact Info</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Contact Information</h3>
                         <ul className="space-y-3">
 
                             <li className="flex items-start gap-3">
@@ -114,7 +114,7 @@ const Footer = () => {
 
                     
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Follow Us</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-blue-200">Social Icons</h3>
                         <div className="flex space-x-4 mb-6">
                             <a
                                 href="https://www.facebook.com/MrRana26"
