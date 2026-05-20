@@ -6,7 +6,7 @@ const CarsSection = async () => {
   const availableCars = await res.json()
 
   return (
-    <div className="container mx-auto p-6 bg-white dark:bg-slate-950 transition-colors">
+    <div className="container mx-auto p-6 rounded-2xl bg-white dark:bg-slate-950 transition-colors">
 
       <div className="my-8 text-center">
         <h1 className="text-2xl font-bold text-slate-950 dark:text-white">Explore Our Premium Fleet</h1>
@@ -52,7 +52,7 @@ const CarsSection = async () => {
                     <span className="text-xs text-slate-400"> / day</span>
                   </div>
                   <Link
-                    href={`explore-cars/:id`}
+                    href={`/explore-cars/${_id}`}
                     className="text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition-colors"
                   >
                     View Details

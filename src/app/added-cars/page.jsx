@@ -1,36 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import AddedCars from "../added-cars/page";
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-const ExploreCarsPage = async () => {
-  const res = await fetch('http://localhost:8000/available-cars')
-  const availableCars = await res.json()
-
-  return (
-    <div className="container mx-auto p-6">
-
-      <div className="my-8 text-center">
-        <h1 className="text-2xl font-bold text-slate-950 dark:text-white">Explore Our Premium Fleet</h1>
-        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Choose from our highly maintained vehicles for your next journey.</p>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-4 mb-8">
-        <input
-          type="text"
-          placeholder="Search by car name..."
-          className="w-full sm:max-w-xs p-2.5 text-sm bg-white dark:bg-slate-900 text-slate-950 dark:text-white rounded-lg border border-slate-200 dark:border-slate-800 outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
-        />
-        <select className="w-full sm:max-w-xs p-2.5 text-sm bg-white dark:bg-slate-900 text-slate-950 dark:text-white rounded-lg border border-slate-200 dark:border-slate-800 outline-none focus:border-indigo-500 dark:focus:border-indigo-500">
-          <option value="all" className="bg-white dark:bg-slate-900">All Vehicle Types</option>
-        </select>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+const AddedCars = async () => {
+    const res = await fetch('http://localhost:8000/available-cars');
+    const userCars = await res.json();
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
 
         {
-          availableCars.map(availableCar => {
-            const { _id, carName, price, carType, imageUrl, seatCapacity, pickupLocation, availabilityStatus, description } = availableCar;
-            return (
+          userCars.map(userCar => {
+                        const { 
+                            _id, carName, dailyPrice, carType, imageUrl, 
+                            seatCapacity, pickupLocation, availabilityStatus, description
+                        } = userCar;
+
+                        return (
               <div key={_id} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between">
 
                 <div>
@@ -58,7 +43,7 @@ const ExploreCarsPage = async () => {
 
                 <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <div>
-                    <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">$ {price}</span>
+                    <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">$ {dailyPrice}</span>
                     <span className="text-xs text-slate-400 dark:text-slate-500"> / day</span>
                   </div>
                   <Link
@@ -75,8 +60,7 @@ const ExploreCarsPage = async () => {
         }
 
       </div>
-    </div>
-  );
+    );
 };
 
-export default ExploreCarsPage;
+export default AddedCars;
