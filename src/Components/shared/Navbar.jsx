@@ -1,5 +1,5 @@
 "use client";
-import { Button, Dropdown, Label } from '@heroui/react';
+import { Avatar, Button, Dropdown, Label } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,8 +8,17 @@ import { IoMdMenu } from 'react-icons/io';
 import { Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import NavLinks from './NavLinks';
+import { authClient } from '@/lib/auth-client';
 
 const Navbar = () => {
+
+    const {
+        data: session,
+    } = authClient.useSession()
+
+    const user = session?.user
+    console.log(session)
+
     const [isDark, setIsDark] = useState(false);
     useEffect(() => {
         if (isDark) {
@@ -44,14 +53,26 @@ const Navbar = () => {
                     <li>
                         <NavLinks href={'/my-bookings'}>My Bookings</NavLinks>
                     </li>
-                    
+
                 </ul>
 
                 <div className='flex items-center gap-2'>
 
                     <div className='hidden md:flex gap-2 items-center'>
-                        <Link href={'/login'}><Button variant="primary">Sign In</Button></Link>
-                        <Link href={'/register'}><Button variant="primary">Sign Up</Button></Link>
+                        {user ? <>
+                            <div className='flex items-center gap-3'>
+                                <Avatar>
+                                    <Avatar.Image alt="Person Image" src={user?.image} />
+                                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                                </Avatar>
+                                <Button variant='danger'>LogOut</Button>
+                            </div>
+                        </> :
+                            <>
+                                <Link href={'/login'}><Button variant="primary">Sign In</Button></Link>
+                                <Link href={'/register'}><Button variant="primary">Sign Up</Button></Link>
+                            </>
+                        }
                     </div>
 
                     <div>

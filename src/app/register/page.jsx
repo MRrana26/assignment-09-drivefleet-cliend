@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { 
     Button, 
     Card, 
@@ -16,6 +17,19 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 const RegistrationPage = () => {
+    const onSubmit = async (e)=>{
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const user = Object.fromEntries(formData.entries());
+        const {data, error} = await authClient.signUp.email({
+            email: user.email,
+            name: user.name,
+            password: user.password,
+            image: user.image
+
+        })
+        console.log({data, error})
+    }
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4">
             <Card className="w-full max-w-md p-6">
@@ -27,7 +41,8 @@ const RegistrationPage = () => {
                     <p className="text-gray-500 text-center">Please register to get started</p>
                 </CardHeader>
 
-                <Form className="flex w-full flex-col gap-4">
+                <Form onSubmit={onSubmit}
+                 className="flex w-full flex-col gap-4">
                     <TextField
                         isRequired
                         name="name"
@@ -63,7 +78,7 @@ const RegistrationPage = () => {
 
                     
                     <TextField
-                        name="photoURL"
+                        name="image"
                         type="url"
                         validate={(value) => {
                             if (value && !/^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i.test(value)) {
