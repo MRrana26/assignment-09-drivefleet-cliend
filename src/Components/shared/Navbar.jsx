@@ -44,6 +44,7 @@ const Navbar = () => {
                     <li>
                         <NavLinks href={'/my-bookings'}>My Bookings</NavLinks>
                     </li>
+                    
                 </ul>
 
                 <div className='flex items-center gap-2'>
