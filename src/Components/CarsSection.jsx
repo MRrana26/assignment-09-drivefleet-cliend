@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CarsSection = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`, {cache: "no-store"})
   const availableCars = await res.json()
 
   return (

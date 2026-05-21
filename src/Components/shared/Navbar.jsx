@@ -96,7 +96,7 @@ const Navbar = () => {
                                         </Dropdown.Item>
 
                                         <Dropdown.Item id="my-added-cars" asChild>
-                                            <NavLinks href={'/my-added-cars'}>
+                                            <NavLinks href={'/added-cars'}>
                                                 <span className='flex items-center gap-2'>
                                                     <Car className="w-4 h-4" />
                                                     My Added Cars
