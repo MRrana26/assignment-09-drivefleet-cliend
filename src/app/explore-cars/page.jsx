@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import AddedCars from "../added-cars/page";
+
 
 const ExploreCarsPage = async () => {
   const res = await fetch('http://localhost:8000/available-cars')

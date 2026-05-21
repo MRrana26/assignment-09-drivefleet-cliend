@@ -45,12 +45,8 @@ const Navbar = () => {
                 <ul className='hidden md:flex items-center gap-3 text-gray-700 dark:text-gray-200 font-medium'>
                     <li><NavLinks href={'/'}>Home</NavLinks></li>
                     <li><NavLinks href={'/explore-cars'}>Explore Cars</NavLinks></li>
-                    {user && (
-                        <li><NavLinks href={'/add-car'}>Add Car</NavLinks></li>
-                    )}
-                    {user && (
-                        <li><NavLinks href={'/my-bookings'}>My Bookings</NavLinks></li>
-                    )}
+                    <li><NavLinks href={'/add-car'}>Add Car</NavLinks></li>
+                    <li><NavLinks href={'/my-bookings'}>My Bookings</NavLinks></li>
                 </ul>
 
 

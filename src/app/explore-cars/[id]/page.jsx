@@ -1,4 +1,6 @@
+import { auth } from '@/lib/auth';
 import { Button } from '@heroui/react';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -8,7 +10,16 @@ import { MdEventSeat } from 'react-icons/md';
 
 const CarDetailsPage = async ({ params }) => {
     const { id } = await params;
-    const res = await fetch(`http://localhost:8000/available-cars/${id}`);
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    console.log(token)
+    const res = await fetch(`http://localhost:8000/available-cars/${id}`,{
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    }
+    );
     const car = await res.json();
 
     const { 
