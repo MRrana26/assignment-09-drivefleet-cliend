@@ -3,7 +3,7 @@ import Link from "next/link";
 
 
 const ExploreCarsPage = async () => {
-  const res = await fetch('http://localhost:8000/available-cars')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`)
   const availableCars = await res.json()
 
   return (

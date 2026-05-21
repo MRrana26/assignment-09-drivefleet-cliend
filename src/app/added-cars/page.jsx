@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const AddedCars = async () => {
-    const res = await fetch('http://localhost:8000/available-cars');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`);
     const userCars = await res.json();
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
