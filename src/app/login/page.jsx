@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { 
     Button, 
     Card, 
@@ -14,6 +15,29 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const user = Object.fromEntries(formData.entries())
+
+        const { data, error } = await authClient.signIn.email({
+            email: user.email,
+            password: user.password,
+        });
+
+        console.log({ data, error });
+        
+    }
+
+    const handleSignInGoogle = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        });
+    };
+
+    
+
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4">
             <Card className="w-full max-w-md p-6">
@@ -25,7 +49,8 @@ const LoginPage = () => {
                     <p className="text-gray-500 text-center">Please login to your account</p>
                 </CardHeader>
 
-                <Form className="flex w-full flex-col gap-4">
+                <Form onSubmit={onSubmit}
+                 className="flex w-full flex-col gap-4">
                     <TextField
                         isRequired
                         name="email"
@@ -81,7 +106,7 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                <Button
+                <Button onClick={handleSignInGoogle}
                     className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
                     size="lg"
                 >

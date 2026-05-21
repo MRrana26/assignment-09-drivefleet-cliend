@@ -7,7 +7,7 @@ import {
     CardHeader, 
     Description, 
     FieldError, 
-    Form, 
+    Form,
     Input, 
     Label, 
     TextField 
@@ -30,6 +30,14 @@ const RegistrationPage = () => {
         })
         console.log({data, error})
     }
+
+    const handleSignInGoogle = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        });
+    };
+
+
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4">
             <Card className="w-full max-w-md p-6">
@@ -96,11 +104,11 @@ const RegistrationPage = () => {
                     
                     <TextField
                         isRequired
-                        minLength={6}
+                        minLength={8}
                         name="password"
                         type="password"
                         validate={(value) => {
-                            if (value.length < 6) {
+                            if (value.length < ) {
                                 return "Password must be at least 6 characters";
                             }
                             if (!/[A-Z]/.test(value)) {
@@ -134,7 +142,7 @@ const RegistrationPage = () => {
                     <span className="px-2 text-gray-400 text-sm">OR</span>
                 </div>
 
-                <Button
+                <Button onClick={handleSignInGoogle}
                     className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
                     size="lg"
                 >
