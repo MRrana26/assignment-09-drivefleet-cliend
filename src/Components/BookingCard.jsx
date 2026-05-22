@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaMapPin } from 'react-icons/fa';
 import { MdEventSeat } from 'react-icons/md';
+import { toast } from 'sonner';
 
 const BookingCard = ({ car }) => {
 
@@ -40,7 +41,7 @@ const BookingCard = ({ car }) => {
             body: JSON.stringify(bookingData)
         })
         const data = await res.json()
-        console.log(data)
+        toast.success(`${carName} Car booking successful!`)
     }
 
 
