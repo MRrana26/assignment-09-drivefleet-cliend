@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DriveFleet - Car Rental Platform
 
-## Getting Started
+Live Site: https://assignment-09-drivefleet-cliend.vercel.app
+Server Site: https://assignment-09-drivefleet-server.vercel.app
 
-First, run the development server:
+## About DriveFleet
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+DriveFleet is a modern full-stack car rental platform where users can explore available vehicles, book cars, manage their reservations, and list their own cars for rent. Built with Next.js, MongoDB, and secure JWT authentication.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Secure Authentication with Email/Password and Google Login, protected by JWT stored in HTTPOnly cookies to ensure safe and reliable user sessions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Full Car Management where users can add, update, and delete their own car listings with details like price, type, seat capacity, location, and availability status.
 
-## Learn More
+- Smart Booking System that allows logged-in users to book any available car, choose driver assistance, add special notes, and track all their bookings in one place.
 
-To learn more about Next.js, take a look at the following resources:
+- Search and Filter functionality to find cars by name using MongoDB regex and filter by car type, making it easy to discover the right vehicle quickly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Responsive Design that works seamlessly across mobile, tablet, and desktop devices with dark mode support and a clean, recruiter-friendly interface.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Frontend: Next.js, Tailwind CSS, HeroUI
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Authentication: Better Auth, JWT  Cookie
+- Deployment: Vercel (Client), Render (Server)
