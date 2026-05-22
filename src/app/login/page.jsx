@@ -1,42 +1,65 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { 
-    Button, 
-    Card, 
-    CardHeader, 
-    Description, 
-    FieldError, 
-    Form, 
-    Input, 
-    Label, 
-    TextField 
+import {
+    Button,
+    Card,
+    CardHeader,
+    Description,
+    FieldError,
+    Form,
+    Input,
+    Label,
+    TextField
 } from "@heroui/react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 const LoginPage = () => {
 
     const onSubmit = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        const user = Object.fromEntries(formData.entries())
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const user = Object.fromEntries(formData.entries());
 
-        const { data, error } = await authClient.signIn.email({
-            email: user.email,
-            password: user.password,
-        });
+        if (!user.email || !user.password) {
+            return toast.error("Please fill in all fields.");
+        }
 
-        console.log({ data, error });
-        
-    }
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email: user.email,
+                password: user.password,
+            });
 
-    const handleSignInGoogle = async () => {
-        await authClient.signIn.social({
-            provider: "google"
-        });
+            if (error) {
+                return toast.error(error.message || "Invalid email or password!");
+            }
+
+            if (data) {
+                toast.success("Login successfully!");
+            }
+        } catch (err) {
+            console.error(err);
+            toast.error("Something went wrong. Please try again.");
+        }
     };
 
-    
+    const handleSignInGoogle = async () => {
+        try {
+            await authClient.signIn.social({
+                provider: "google",
+            });
+
+            toast.success("Redirecting to Google...");
+
+        } catch (err) {
+            console.error(err);
+            toast.error("Google sign-in failed. Please try again.");
+        }
+    };
+
+
 
     return (
         <div className="min-h-screen flex items-center justify-center py-12 px-4">
@@ -50,7 +73,7 @@ const LoginPage = () => {
                 </CardHeader>
 
                 <Form onSubmit={onSubmit}
-                 className="flex w-full flex-col gap-4">
+                    className="flex w-full flex-col gap-4">
                     <TextField
                         isRequired
                         name="email"
@@ -96,7 +119,7 @@ const LoginPage = () => {
                     </Button>
                 </Form>
 
-                
+
                 <div className="relative my-6">
                     <div className="absolute inset-0 flex items-center">
                         <div className="w-full border-t border-gray-300"></div>

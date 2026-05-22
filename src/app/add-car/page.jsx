@@ -12,8 +12,17 @@ const AddCarPage = () => {
         const formData = new FormData(e.currentTarget)
         const carAdd = Object.fromEntries(formData.entries())
 
+        if(carAdd.seatCapacity){
+            carAdd.seatCapacity = Number(carAdd.seatCapacity);
+        }
+
+        if (carAdd.price) {
+        carAdd.price = Number(carAdd.price); 
+    }
+
         carAdd.userEmail = session?.user?.email
         carAdd.userName = session?.user?.name
+        
         carAdd.bookingCount = 0
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add-car`, {

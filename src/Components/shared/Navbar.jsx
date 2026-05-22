@@ -4,13 +4,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { IoMdMenu } from 'react-icons/io';
-import { Moon, Sun, Car, CalendarDays, PlusCircle, LogOut, User } from 'lucide-react';
+import { Moon, Sun, Car, CalendarDays, PlusCircle, LogOut } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import NavLinks from './NavLinks';
 import { authClient } from '@/lib/auth-client';
 import { FaChevronCircleDown } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 const Navbar = () => {
+    const router = useRouter();
+
     const {
         data: session,
         isPending,
@@ -29,7 +33,13 @@ const Navbar = () => {
     }, [isDark]);
 
     const handleSignOut = async () => {
-        await authClient.signOut();
+        try {
+            await authClient.signOut();
+            router.refresh();
+            toast.success('You are logout!');
+        } catch (error) {
+            toast.error(`Logout failed: ${error?.message || 'Unknown error'}`);
+        }
     };
 
     return (
@@ -48,7 +58,6 @@ const Navbar = () => {
                     <li><NavLinks href={'/add-car'}>Add Car</NavLinks></li>
                     <li><NavLinks href={'/my-bookings'}>My Bookings</NavLinks></li>
                 </ul>
-
 
                 <div className='flex items-center gap-2'>
 
@@ -69,6 +78,7 @@ const Navbar = () => {
                                         <Avatar.Image alt="Profile" src={user?.image} />
                                         <Avatar.Fallback>{user.name?.charAt(0)}</Avatar.Fallback>
                                     </Avatar>
+
                                     <span className='text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-200'>
                                         {user?.name} <FaChevronCircleDown />
                                     </span>
@@ -96,7 +106,8 @@ const Navbar = () => {
                                         </Dropdown.Item>
 
                                         <Dropdown.Item id="my-added-cars" asChild>
-                                            <NavLinks href={'/added-cars'}>
+
+                                            <NavLinks href={'/my-added-cars'}>
                                                 <span className='flex items-center gap-2'>
                                                     <Car className="w-4 h-4" />
                                                     My Added Cars
@@ -105,12 +116,13 @@ const Navbar = () => {
                                         </Dropdown.Item>
 
                                         <Dropdown.Item id="logout" asChild>
-                                            <NavLinks href={'/'} onClick={handleSignOut}>
-                                                <span className='flex items-center gap-2 text-red-500'>
-                                                    <LogOut className="w-4 h-4" />
-                                                    Logout
-                                                </span>
-                                            </NavLinks>
+                                            <button
+                                                onClick={handleSignOut}
+                                                className="flex items-center gap-2 text-red-500 w-full px-2 py-1"
+                                            >
+                                                <LogOut className="w-4 h-4" />
+                                                Logout
+                                            </button>
                                         </Dropdown.Item>
 
                                     </Dropdown.Menu>
@@ -143,20 +155,13 @@ const Navbar = () => {
                         )}
                     </button>
 
-
                     <div className='block md:hidden pl-2'>
                         <Dropdown>
                             <div className='flex items-center gap-3'>
                                 {!isPending && user && (
                                     <Avatar>
-                                        <Avatar.Image
-                                            alt="Profile"
-                                            src={user?.image || ""}
-                                        />
-
-                                        <Avatar.Fallback>
-                                            {user?.name?.charAt(0)}
-                                        </Avatar.Fallback>
+                                        <Avatar.Image alt="Profile" src={user?.image} />
+                                        <Avatar.Fallback>{user.name?.charAt(0)}</Avatar.Fallback>
                                     </Avatar>
                                 )}
 

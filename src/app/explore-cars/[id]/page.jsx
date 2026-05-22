@@ -33,7 +33,7 @@ const CarDetailsPage = async ({ params }) => {
                 
                
                 <Link 
-                    href={'/'}
+                    href={'/explore-cars'}
                 >
                   <Button className={"mb-3"}> <IoArrowBackCircle />Back to Explore</Button>   
                 </Link>
