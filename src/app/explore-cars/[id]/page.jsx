@@ -1,13 +1,13 @@
 // app/explore-cars/[id]/page.jsx
+import BookingCard from '@/Components/BookingCard';
 import { auth } from '@/lib/auth';
 import { Button } from '@heroui/react';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaMapPin } from 'react-icons/fa';
 import { IoArrowBackCircle } from 'react-icons/io5';
-import { MdEventSeat } from 'react-icons/md';
+
 
 const CarDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -104,62 +104,7 @@ const CarDetailsPage = async ({ params }) => {
                         </div>
                     </div>
 
-                    <div className="space-y-6">
-                        <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800/60 p-6 rounded-2xl shadow-sm sticky top-6">
-
-                            <div className="mb-6">
-                                <p className="text-gray-400 dark:text-gray-500 text-xs uppercase font-semibold tracking-wider">
-                                    Rental Price
-                                </p>
-                                <div className="flex items-baseline gap-1 mt-1">
-                                    <span className="text-3xl font-black text-gray-950 dark:text-white">
-                                        ${price}
-                                    </span>
-                                    <span className="text-gray-500 dark:text-slate-400 text-sm">/ day</span>
-                                </div>
-                            </div>
-
-                            <div className="space-y-4 my-6 pt-4 border-t border-gray-100 dark:border-slate-800/60">
-                                
-                                <div className="flex justify-between text-sm">
-                                    <span className="flex items-center gap-1.5 text-gray-500 dark:text-slate-400">
-                                        <MdEventSeat /> Seating Capacity
-                                    </span>
-                                    <span className="font-bold text-gray-900 dark:text-white">
-                                        {seatCapacity} Seats
-                                    </span>
-                                </div>
-                                <div className="flex justify-between text-sm">
-                                    <span className="flex items-center gap-1.5 text-gray-500 dark:text-slate-400">
-                                        <FaMapPin /> Pickup Location
-                                    </span>
-                                    <span className="font-bold text-gray-900 dark:text-white">
-                                        {pickupLocation}
-                                    </span>
-                                </div>
-                            </div>
-
-                           
-                            {availabilityStatus === "Available" ? (
-                                <Link href={`/bookings/${id}`}>
-                                    <button className="w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 shadow-sm bg-indigo-600 hover:bg-indigo-700 text-white active:scale-[0.99]">
-                                        Book This Car Now
-                                    </button>
-                                </Link>
-                            ) : (
-                                <button
-                                    disabled
-                                    className="w-full py-3 px-4 rounded-xl text-sm font-semibold bg-gray-200 dark:bg-slate-800 text-gray-400 dark:text-slate-600 cursor-not-allowed"
-                                >
-                                    Currently Unavailable
-                                </button>
-                            )}
-
-                            <p className="text-center text-[11px] text-gray-400 dark:text-slate-500 mt-3">
-                                Free cancellation up to 24 hours before pickup.
-                            </p>
-                        </div>
-                    </div>
+                    <BookingCard car={car}></BookingCard>
 
                 </div>
             </div>
