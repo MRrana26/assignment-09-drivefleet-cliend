@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { authClient } from '@/lib/auth-client';
 import { MdDeleteForever } from 'react-icons/md';
-import { FaEdit } from 'react-icons/fa';
 import { Button } from '@heroui/react';
+import EditCarsDetails from '@/Components/EditCarsDetails';
 
 const MyAddedCars = () => {
 
@@ -110,10 +110,7 @@ const MyAddedCars = () => {
 
 
                             <div className="flex items-center justify-between gap-4 mt-5 pt-3 border-t border-gray-50 dark:border-slate-800">
-                                <Button variant="primary" className="flex items-center justify-center gap-2 w-full py-2 rounded-xl text-sm font-semibold">
-                                    <FaEdit className="text-base" />
-                                    Edit
-                                </Button>
+                                <EditCarsDetails/>
                                 <Button variant="danger" className="flex items-center justify-center gap-2 w-full py-2 rounded-xl text-sm font-semibold">
                                     <MdDeleteForever className="text-lg" />
                                     Delete
