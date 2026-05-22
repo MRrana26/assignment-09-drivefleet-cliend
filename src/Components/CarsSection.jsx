@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MdCategory, MdEventSeat } from "react-icons/md";
 
 const CarsSection = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`, {cache: "no-store"})
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/available-cars`, { cache: "no-store" })
   const availableCars = await res.json()
 
   return (
@@ -13,19 +14,19 @@ const CarsSection = async () => {
         <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Choose from our highly maintained vehicles for your next journey.</p>
       </div>
 
-      
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         {
-          availableCars.map(availableCar => {
-            const { _id, carName, price, carType, imageUrl, seatCapacity, pickupLocation, availabilityStatus, description } = availableCar;
+          availableCars.slice(0, 6).map(availableCar => {
+            const { _id, carName, price, imageUrl, seatCapacity, carType, availabilityStatus, description } = availableCar;
             return (
               <div key={_id} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between shadow-sm">
 
                 <div>
                   <div className="relative h-48 w-full overflow-hidden rounded-xl bg-slate-100">
-                    
+
                     <Image
                       src={imageUrl}
                       alt={carName}
@@ -44,6 +45,19 @@ const CarsSection = async () => {
                       {description}
                     </p>
                   </div>
+
+                  <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3 dark:border-gray-800">
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      <MdEventSeat className="text-lg text-gray-400 dark:text-gray-500" />
+                      <span>{seatCapacity} Seats</span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400">
+                      <MdCategory className="text-lg text-gray-400 dark:text-gray-500" />
+                      <span className="capitalize">{carType}</span>
+                    </div>
+                  </div>
+
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">

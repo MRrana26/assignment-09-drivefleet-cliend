@@ -48,8 +48,8 @@ const Navbar = () => {
 
                 <Link href="/" className='flex items-center'>
                     <Image src={'/logo.png'} width={50} height={50} alt='car logo' />
-                    <span className='text-3xl text-blue-800 dark:text-blue-400 font-bold'>Drive</span>
-                    <span className='text-3xl text-red-600 dark:text-red-400 font-bold'>Fleet</span>
+                    <span className='text-xl sm:text-3xl text-blue-800 dark:text-blue-400 font-bold'>Drive</span>
+                    <span className='text-xl sm:text-3xl text-red-600 dark:text-red-400 font-bold'>Fleet</span>
                 </Link>
 
                 <ul className='hidden md:flex items-center gap-3 text-gray-700 dark:text-gray-200 font-medium'>
