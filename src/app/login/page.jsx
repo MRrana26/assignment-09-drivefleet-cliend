@@ -1,5 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from 'next/navigation';
 import {
     Button,
     Card,
@@ -12,11 +13,11 @@ import {
     TextField
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
 
 const LoginPage = () => {
+    const router = useRouter();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -39,7 +40,7 @@ const LoginPage = () => {
 
             if (data) {
                 toast.success("Login successfully!");
-                redirect('/')
+                router.push('/')
             }
         } catch (err) {
             console.error(err);

@@ -14,7 +14,7 @@ import {
 } from "@heroui/react";
 import { Check } from "lucide-react";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
 
